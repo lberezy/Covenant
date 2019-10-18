@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.CodeAnalysis;
 
+
 using Covenant.Hubs;
 using Covenant.Core;
 using Encrypt = Covenant.Core.Encryption;
@@ -27,6 +28,8 @@ using Covenant.Models.Listeners;
 using Covenant.Models.Launchers;
 using Covenant.Models.Grunts;
 using Covenant.Models.Indicators;
+using OutputKind = Microsoft.CodeAnalysis.OutputKind; //Covenant.API.Models.OutputKind;
+using CovenantUser = Covenant.Models.Covenant.CovenantUser;
 
 namespace Covenant.Models
 {

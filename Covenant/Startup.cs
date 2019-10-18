@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.HttpOverrides;
 using Swashbuckle.AspNetCore.Swagger;
@@ -79,6 +78,7 @@ namespace Covenant
                 options.SlidingExpiration = true;
             });
 
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.AddAuthentication()
                 .AddJwtBearer("JwtBearer", options =>
@@ -129,7 +129,9 @@ namespace Covenant
                     .Build());
             });
 
-            services.AddMvc().AddJsonOptions(options =>
+            //services.AddControllers().AddNewtonsoftJson();
+            //.AddJsonOptions(
+            services.AddMvc().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             }).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
@@ -148,10 +150,10 @@ namespace Covenant
                 c.SchemaFilter<AutoRestSchemaFilter>();
             });
 
-            services.AddSignalR().AddJsonProtocol(options =>
-            {
-                options.PayloadSerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            //services.AddSignalR().AddJsonProtocol(options =>
+            //{
+            //    options.  // .PayloadSerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //});
 
             services.AddSingleton<ConcurrentDictionary<int, CancellationTokenSource>>();
         }
